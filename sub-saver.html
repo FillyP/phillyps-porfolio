@@ -46,7 +46,16 @@
     <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 10px;">Enter your info to instantly receive a mock AWS SES alert.</p>
     
     <input type="text" id="demo-username" placeholder="Username (Optional)" class="sub-input" style="margin-bottom: 10px;">
-    
+
+	<div class="architecture-disclaimer">
+    <strong><span style="font-size: 1.1em;">☁️</span> Architecture Note:</strong> 
+    To maintain strict cloud security and prevent spam abuse, this serverless application operates within the <strong>AWS SES Sandbox</strong> environment. Live email dispatch is restricted to pre-authorized test accounts. I am fully prepared to provision your email address for a live demonstration during the interview process!
+</div>
+
+<input type="email" id="demo-email" placeholder="Your Email Address" class="sub-input">
+<button class="btn-outline" style="width: 100%;" onclick="sendDemoEmail()">Send Test Alert</button>
+<div id="demo-status" class="api-status hidden"></div>				
+					
     <input type="email" id="demo-email" placeholder="Your Email Address" class="sub-input">
     <button class="btn-outline" style="width: 100%;" onclick="sendDemoEmail()">Send Test Alert</button>
     <div id="demo-status" class="api-status hidden"></div>
