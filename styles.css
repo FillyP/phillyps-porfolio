@@ -265,9 +265,9 @@ body, p, h1, h3, h4, li, .summary-text, .nav-links a, .section-title, .project-c
     color: #333333 !important;
 }
 
-/* 3. Corporate Blue accents */
-h2, .logo {
-    color: #0066cc !important; /* A crisp, lighter corporate blue */
+/* 3. Match the Logo and Systems Engineer Text perfectly */
+header h2, .logo {
+    color: #0066cc !important; 
     font-family: 'Aptos Display', 'Inter', -apple-system, sans-serif !important;
 }
 
