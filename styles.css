@@ -267,7 +267,7 @@ body, p, h1, h3, h4, li, .summary-text, .nav-links a, .section-title, .project-c
 
 /* 3. Corporate Blue accents */
 h2, .logo {
-    color: #0052cc !important; 
+    color: #0066cc !important; /* A crisp, lighter corporate blue */
     font-family: 'Aptos Display', 'Inter', -apple-system, sans-serif !important;
 }
 
@@ -319,4 +319,24 @@ nav {
 #contact, footer {
     background-color: #fafafa !important;
     border-top: 1px solid #e0e0e0 !important;
+}
+
+/* 8. Light Mode Outline Button ("View My Work") */
+.btn-outline {
+    border: 2px solid #0066cc !important;
+    color: #0066cc !important;
+    background: transparent !important;
+    display: inline-block !important;
+    padding: 12px 32px !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+}
+
+.btn-outline:hover {
+    background-color: #0066cc !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2) !important;
 }
