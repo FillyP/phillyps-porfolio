@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Documents | Phillyp's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* ========================================= */
+        /* ISOLATED DOCUMENT VIEWER STYLES           */
+        /* ========================================= */
+        body {
+            background-color: #f8fafc !important; /* Forces light gray background */
+        }
+
+        .back-nav {
+            max-width: 1200px;
+            margin: 40px auto 20px auto;
+            padding: 0 20px;
+        }
+
+        .doc-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto 60px auto;
+            padding: 0 20px;
+            gap: 20px;
+            min-height: 75vh;
+        }
+
+        .doc-sidebar {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            align-self: flex-start;
+        }
+
+        .doc-sidebar h3 {
+            margin-bottom: 20px;
+            color: #333333;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        .doc-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 14px;
+            margin-bottom: 12px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            color: #475569;
+            font-family: 'Aptos', 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .doc-btn:hover {
+            border-color: #0066cc;
+            color: #0066cc;
+            background: #f8fafc;
+            transform: translateX(3px);
+        }
+
+        .doc-btn.active {
+            background: #e0f2fe;
+            border-color: #0066cc;
+            color: #0066cc;
+            border-left: 4px solid #0066cc;
+        }
+
+        .doc-viewer {
+            flex: 3;
+            min-width: 300px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        /* The iframe acts as the window into the PDF */
+        .doc-viewer iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 800px;
+            border: none;
+            display: block;
+        }
+
+        /* Responsive stack for mobile devices */
+        @media (max-width: 768px) {
+            .doc-sidebar {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="back-nav">
+        <a href="index.html" class="btn-outline">&larr; Back to Portfolio</a>
+    </div>
+
+    <div class="doc-wrapper">
+        <div class="doc-sidebar">
+            <h3>Technical Portfolio</h3>
+            <button class="doc-btn active" onclick="loadDoc('Database Migration - DSHOP.pdf', this)">SQL Database Migration</button>
+            <button class="doc-btn" onclick="loadDoc('UAT- Item Maintenance.pdf', this)">UAT: Item Maintenance</button>
+            <button class="doc-btn" onclick="loadDoc('EFT UAT -FCB VX820.pdf', this)">UAT: EFT Payment Terminal</button>
+            <button class="doc-btn" onclick="loadDoc('Recipe Manual.pdf', this)">User Guide: Recipe Costing</button>
+        </div>
+        
+        <div class="doc-viewer">
+            <iframe id="pdf-frame" src="Database Migration - DSHOP.pdf" title="Document Viewer"></iframe>
+        </div>
+    </div>
+
+    <script>
+        /* ========================================= */
+        /* PDF SWITCHING LOGIC                       */
+        /* ========================================= */
+        function loadDoc(filename, btnElement) {
+            // 1. Change the source of the iframe to the new PDF
+            document.getElementById('pdf-frame').src = filename;
+            
+            // 2. Remove the 'active' styling from all buttons
+            let buttons = document.getElementsByClassName('doc-btn');
+            for(let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+            
+            // 3. Add the 'active' styling to the button that was just clicked
+            btnElement.classList.add('active');
+        }
+    </script>
+</body>
+</html>
