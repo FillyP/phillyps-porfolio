@@ -271,6 +271,10 @@ header h2, .logo {
     font-family: 'Aptos Display', 'Inter', -apple-system, sans-serif !important;
 }
 
+header h2 {
+    font-weight: 600 !important; /* Thickens the font so the blue matches optically */
+}
+
 /* 4. The Signature Size Fix */
 .document-signature {
     width: 180px !important; /* Perfect signature size */
