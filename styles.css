@@ -1,7 +1,6 @@
 /* The fallback font if all else fails */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-
 :root {
     --bg-dark: #0f172a;
     --bg-darker: #020617;
@@ -138,7 +137,7 @@ header h2 {
     transform: translateY(-2px);
 }
 
-/* Outline Button (to stle the button) */
+/* Outline Button */
 .btn-outline {
     display: inline-block;
     border: 2px solid var(--accent);
@@ -190,16 +189,11 @@ section {
     border-color: rgba(56, 189, 248, 0.3);
 }
 
-.card-icon {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
 .project-img {
     width: 100%;
     height: 180px;
     object-fit: cover;
-    object-position: top; /* Focuses on the top half of the calculator */
+    object-position: top;
     border-radius: 8px;
     margin-bottom: 20px;
     border: 1px solid rgba(255,255,255,0.05);
@@ -254,570 +248,75 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Calculator UI Styles */
-.calculator-ui {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.calculator-ui input, .calculator-ui select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: var(--bg-dark);
-    color: var(--text-main);
-    font-size: 1rem;
-}
-
-.calculator-ui input:focus, .calculator-ui select:focus {
-    outline: none;
-    border-color: var(--accent);
-}
-
-.calc-output {
-    margin-top: 15px;
-    padding: 12px;
-    background: rgba(56, 189, 248, 0.1);
-    border-left: 4px solid var(--accent);
-    border-radius: 4px;
-    font-family: monospace;
-    font-size: 1.1rem;
-    color: var(--text-main);
-}
-
-.hidden {
-    display: none;
-}
-/* --- Calculator Page Specific Styles --- */
-.calculator-wrapper {
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-/* The Calculator Body */
-.calculator-ui {
-    display: block; /* This fixes the squished side-by-side bug! */
-    background: #2a2d35; /* Matte dark grey plastic */
-    padding: 30px;
-    border-radius: 12px;
-    /* Creates a realistic 3D casing effect */
-    box-shadow: 
-        15px 15px 30px rgba(0,0,0,0.6), 
-        inset -3px -3px 10px rgba(0,0,0,0.5), 
-        inset 3px 3px 10px rgba(255,255,255,0.1);
-    border: 1px solid #1a1c23;
-}
-
-/* The LCD Display */
-.calc-display {
-    background: #8fa082; /* Classic retro LCD Green/Grey */
-    color: #111512; /* Dark text */
-    font-size: 3.5rem;
-    text-align: right;
-    padding: 20px 15px;
-    border-radius: 6px;
-    margin-bottom: 25px;
-    overflow-x: auto;
-    /* Makes the screen look physically pushed into the casing */
-    border: inset 4px #1c1f24; 
-    box-shadow: inset 0px 5px 10px rgba(0,0,0,0.3);
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-
-/* Keypad Grid */
-.calc-keypad {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px; /* Creates even spacing so buttons fill the width */
-}
-
-/* The Base Buttons */
-.calc-btn {
-    background: #e0e0e0; /* Classic light grey buttons */
-    color: #333;
-    border: none;
-    padding: 20px 0;
-    font-size: 1.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 100%; /* Forces buttons to expand to grid size */
-    /* Creates a thick 3D bottom edge */
-    box-shadow: 0 5px #a0a0a0, inset 0px 2px 2px rgba(255,255,255,0.8);
-    transition: all 0.1s ease;
-    text-align: center;
-}
-
-/* Physical Button Press Effect */
-.calc-btn:active {
-    transform: translateY(5px); /* Pushes the button down */
-    box-shadow: 0 0px #a0a0a0, inset 0px 2px 2px rgba(255,255,255,0.8);
-}
-
-.calc-btn:hover {
-    background: #f0f0f0;
-}
-
-/* Operator Buttons (Divide, Multiply, Subtract, Add) */
-.calc-btn.op {
-    background: #4a5568;
-    color: white;
-    box-shadow: 0 5px #2d3748, inset 0px 2px 2px rgba(255,255,255,0.2);
-}
-.calc-btn.op:active {
-    box-shadow: 0 0px #2d3748, inset 0px 2px 2px rgba(255,255,255,0.2);
-}
-.calc-btn.op:hover {
-    background: #5a667b;
-}
-
-/* Clear Button */
-.calc-btn.clear {
-    grid-column: span 3;
-    background: #e53e3e;
-    color: white;
-    box-shadow: 0 5px #9b2c2c, inset 0px 2px 2px rgba(255,255,255,0.2);
-}
-.calc-btn.clear:active {
-    box-shadow: 0 0px #9b2c2c, inset 0px 2px 2px rgba(255,255,255,0.2);
-}
-.calc-btn.clear:hover {
-    background: #f56565;
-}
-
-/* Zero Button */
-.calc-btn.zero {
-    grid-column: span 2;
-}
-
-/* Equal Button */
-.calc-btn.equal {
-    grid-column: span 2;
-    background: #3182ce;
-    color: white;
-    box-shadow: 0 5px #2b6cb0, inset 0px 2px 2px rgba(255,255,255,0.2);
-}
-.calc-btn.equal:active {
-    box-shadow: 0 0px #2b6cb0, inset 0px 2px 2px rgba(255,255,255,0.2);
-}
-.calc-btn.equal:hover {
-    background: #4299e1;
-}
-
-/* --- Audit Tool Workspace Styles (Standalone App Interface) --- */
-.audit-workspace {
-    background: #ffffff; /* Crisp white background */
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    margin-bottom: 40px;
-    overflow: hidden;
-    /* Adds a heavy drop shadow so it looks like a floating window */
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
-    color: #0f172a; 
-}
-
-.workspace-header {
-    background: #f8fafc;
-    padding: 20px;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.workspace-header h4 {
-    color: #0f172a;
-    margin-bottom: 5px;
-}
-
-.workspace-header p {
-    color: #64748b;
-    font-size: 0.95rem;
-    margin: 0;
-}
-
-.file-upload-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    padding: 20px;
-    background: #ffffff;
-}
-
-.upload-zone label {
-    display: block;
-    font-weight: 600;
-    color: #0284c7; /* Professional blue accent */
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-}
-
-.file-input {
-    width: 100%;
-    padding: 10px;
-    background: #f1f5f9;
-    border: 1px dashed #94a3b8;
-    border-radius: 6px;
-    color: #334155;
-    cursor: pointer;
-}
-
-.workspace-controls {
-    padding: 0 20px 20px 20px;
-    display: flex;
-    justify-content: center; /* This line centers the buttons */
-    gap: 15px;
-    background: #ffffff;
-}
-
-/* Adjusting button colors specifically for the light workspace */
-.workspace-controls .btn {
-    background: #0284c7;
-    color: white;
-}
-.workspace-controls .btn-outline {
-    border-color: #0284c7;
-    color: #0284c7;
-}
-.workspace-controls .btn-outline:hover {
-    background: #0284c7;
-    color: white;
-}
-
-.diff-viewer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-top: 1px solid #e2e8f0;
-}
-
-.pane {
-    display: flex;
-    flex-direction: column;
-}
-
-.pane:first-child {
-    border-right: 1px solid #e2e8f0;
-}
-
-.pane-header {
-    background: #f1f5f9;
-    padding: 10px 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #475569;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.pane-content {
-    background: #ffffff;
-    height: 400px;
-    overflow-y: auto;
-    padding: 0; /* Removed padding so the line numbers touch the far left edge */
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.95rem;
-    color: #334155;
-    counter-reset: line-number; /* Initializes the automatic line counting system */
-}
-
-/* Logic Highlighting Classes */
-.diff-line {
-    position: relative; /* Required for the sidebar positioning */
-    padding: 2px 8px 2px 55px; /* 55px left padding makes room for the numbers */
-    min-height: 24px; 
-    word-break: break-all;
-    white-space: pre-wrap; 
-    /* Removed margins so the sidebars stack into a continuous solid column */
-}
-
-/* The Notepad++ Style Line Number Sidebar */
-.diff-line::before {
-    counter-increment: line-number;
-    content: counter(line-number);
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0; /* Stretches to the full height even if the text wraps downward */
-    width: 45px;
-    background-color: #f1f5f9; /* Classic light gray sidebar */
-    color: #94a3b8;
-    text-align: right;
-    padding-right: 10px;
-    padding-top: 2px; /* Matches the top padding of the text */
-    font-size: 0.85rem;
-    border-right: 1px solid #e2e8f0;
-    user-select: none; /* Prevents users from accidentally copying the line numbers */
-}
-
-/* Updated color classes (removed the old left border for a cleaner IDE look) */
-.diff-red {
-    background: #fee2e2;
-    color: #991b1b;
-}
-
-.diff-green {
-    background: #dcfce7;
-    color: #166534;
-}
-
-/* Fades out the non-highlighted text so the colors pop */
-.diff-muted {
-    color: #cbd5e1; 
-}
-
-/* --- AWS Architecture Simulation Workspace --- */
-.cloud-workspace {
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    margin-bottom: 40px;
-    overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-    display: flex;
-    flex-direction: column;
-}
-
-.cloud-controls {
-    background: #f8fafc;
-    padding: 20px;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.cloud-controls h4 {
-    color: #0f172a;
-    margin-bottom: 15px;
-}
-
-.cloud-canvas {
-    position: relative;
-    height: 350px;
-    background: #0f172a; /* Dark background to make nodes pop */
-    overflow: hidden;
-}
-
-.cables {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.cables line {
-    stroke: #334155;
-    stroke-width: 3;
-}
-
-.node {
-    position: absolute;
-    width: 100px;
-    text-align: center;
-    color: #f8fafc;
-    font-size: 0.8rem;
-    z-index: 10;
-}
-
-.node .icon {
-    background: #1e293b;
-    border: 2px solid #cbd5e1;
-    border-radius: 8px;
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 5px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-}
-
-.node .aws-icon {
-    border-color: #f59e0b; /* AWS Orange */
-    color: #f59e0b;
-}
-
-.node .func-icon {
-    border-color: #a855f7; /* Lambda/Function Purple */
-}
-
-.node small {
-    color: #94a3b8;
-    font-size: 0.7rem;
-}
-
-/* The Animated Request */
-.packet {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    background: #38bdf8;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #38bdf8, 0 0 20px #38bdf8;
-    z-index: 20;
-    transition: top 0.6s linear, left 0.6s linear; 
-}
-
-.hidden {
-    display: none;
-}
-
-/* --- Subscription Saver Workspace --- */
-.sub-workspace {
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    width: 380px;
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-    color: #0f172a;
-    overflow: hidden;
-}
-
-.sub-header {
-    background: #f8fafc;
-    padding: 15px 20px;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.sub-header h4 {
-    margin: 0;
-    color: #334155;
-    font-size: 1rem;
-}
-
-.sub-form {
-    padding: 20px;
-}
-
-.sub-input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    color: #334155;
-    background: #f8fafc;
-}
-
-.sub-input:focus {
-    outline: none;
-    border-color: #0284c7;
-    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
-}
-
-.api-status {
-    margin-top: 15px;
-    padding: 10px;
-    background: #dcfce7;
-    color: #166534;
-    border-radius: 4px;
-    font-family: monospace;
-    font-size: 0.85rem;
-    text-align: center;
-}
-
-.sub-list {
-    padding: 0;
-    max-height: 250px;
-    overflow-y: auto;
-}
-
-.sub-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    border-bottom: 1px solid #e2e8f0;
-    transition: background 0.2s;
-}
-
-.sub-item:hover {
-    background: #f8fafc;
-}
-
-.sub-item:last-child {
-    border-bottom: none;
-}
-
-.sub-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.sub-info strong {
-    font-size: 0.95rem;
-    color: #0f172a;
-}
-
-.sub-info small {
-    color: #64748b;
-    font-size: 0.8rem;
-    margin-top: 3px;
-}
-
-.status-badge {
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-.status-badge.safe {
-    background: #e0f2fe;
-    color: #0284c7;
-}
-
-.status-badge.warning {
-    background: #fef08a;
-    color: #854d0e;
-}
-
-.status-badge.new {
-    background: #dcfce7;
-    color: #166534;
-}
-
+/* ========================================= */
+/* FORCED LIGHT MODE & DOCUMENT STYLING      */
+/* ========================================= */
 
-/* The Font Stack & Light Mode Colors */
-body {
-    background-color: #ffffff; /* Crisp white paper background */
-    color: #333333; /* Dark charcoal text for high contrast but low eye-strain */
-    font-family: 'Aptos', 'Inter', -apple-system, sans-serif;
+/* 1. Nuke the dark backgrounds and gradients */
+body, #about, header, main, .container {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    background-image: none !important; 
+    font-family: 'Aptos', 'Inter', -apple-system, sans-serif !important;
 }
 
-h1, h2, h3, h4, .logo {
-    font-family: 'Aptos Display', 'Inter', -apple-system, sans-serif;
-    color: #1a1a1a; /* Almost black for headers */
+/* 2. Force text to charcoal */
+body, p, h1, h3, h4, li, .summary-text, .nav-links a, .section-title, .project-card p {
+    color: #333333 !important;
 }
 
-/* Tone down the neon blue to a corporate AWS blue */
+/* 3. Corporate Blue accents */
 h2, .logo {
     color: #0052cc !important; 
+    font-family: 'Aptos Display', 'Inter', -apple-system, sans-serif !important;
 }
 
-/* The Signature Styling */
+/* 4. The Signature Size Fix */
 .document-signature {
-    max-width: 250px; /* Keeps it reasonably sized */
-    display: block;
-    margin-top: 30px;
-    mix-blend-mode: multiply; /* This makes the white background of the image blend perfectly */
+    width: 180px !important; /* Perfect signature size */
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    margin: 30px auto 0 auto !important;
+    mix-blend-mode: multiply !important;
 }
 
-/* Fix the Navbar for Light Mode */
+/* 5. Clean up the Profile Picture */
+.profile-img {
+    border: 3px solid #e0e0e0 !important; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05) !important; 
+}
+
+/* 6. Fix the Navbar */
 nav {
     background-color: #ffffff !important;
-    border-bottom: 1px solid #e0e0e0; /* Crisp line like a document header */
+    border-bottom: 1px solid #e0e0e0 !important; 
 }
 
-nav a {
-    color: #333333 !important;
-    font-weight: 600;
+/* 7. Light Mode Project Cards */
+.project-card {
+    background: #ffffff !important;
+    border: 1px solid #e0e0e0 !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
 }
 
-/* Clean up the Profile Picture */
-#about img[alt="Phillyp"] {
-    border: 3px solid #e0e0e0; /* Removes neon glow, adds clean grey border */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Very subtle paper shadow */
+.project-card:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    border-color: #0052cc !important;
+}
+
+.demo-btn {
+    color: #0052cc !important;
+    border-color: #0052cc !important;
+}
+
+.demo-btn:hover {
+    background-color: #0052cc !important;
+    color: #ffffff !important;
+}
+
+/* Contact Area Fix */
+#contact, footer {
+    background-color: #fafafa !important;
+    border-top: 1px solid #e0e0e0 !important;
 }
