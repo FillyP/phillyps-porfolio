@@ -3,72 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscription Saver | Phillyp's Portfolio</title>
+    <title>ActiveSub Tool | Phillyp's Portfolio</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================= */
+        /* ISOLATED ACTIVESUB STYLES                 */
+        /* ========================================= */
+        body {
+            background-color: #f8fafc !important; 
+        }
+
+        .back-nav {
+            max-width: 900px;
+            margin: 40px auto 20px auto;
+            padding: 0 20px;
+        }
+
+        .tool-wrapper {
+            max-width: 900px;
+            margin: 0 auto 60px auto;
+            padding: 0 20px;
+        }
+
+        .tool-container {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .tool-header {
+            font-size: 2.2rem;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+            font-family: 'Aptos Display', 'Inter', sans-serif;
+            font-weight: 700;
+        }
+
+        .tech-stack {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .tech-stack span {
+            color: #0066cc;
+            font-weight: 600;
+        }
+
+        /* Article Formatting */
+        h3 {
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-family: 'Aptos Display', 'Inter', sans-serif;
+            font-size: 1.2rem;
+        }
+
+        p, ul {
+            color: #333333;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        ul {
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Form Layouts */
+        .interactive-section {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"], input[type="date"], input[type="email"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .action-btn {
+            background: #0066cc;
+            color: #ffffff;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .action-btn:hover {
+            background: #0052a3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+        }
+
+        .action-btn.outline {
+            background: transparent;
+            color: #0066cc;
+            border: 2px solid #0066cc;
+        }
+
+        .action-btn.outline:hover {
+            background: #0066cc;
+            color: #ffffff;
+        }
+
+        /* Success & Disclaimers */
+        .success-msg {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #16a34a;
+            font-weight: 600;
+            margin-top: 15px;
+            font-size: 0.95rem;
+        }
+
+        .disclaimer {
+            background: #e0f2fe;
+            border-left: 4px solid #0066cc;
+            padding: 15px;
+            border-radius: 0 6px 6px 0;
+            margin: 20px 0;
+            font-size: 0.95rem;
+            color: #0f172a;
+        }
+
+        hr.dashed {
+            border: 0;
+            border-top: 2px dashed #e2e8f0;
+            margin: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .tool-container { padding: 20px; }
+            .form-group { flex-direction: column; }
+        }
+    </style>
 </head>
 <body>
-    <div class="container" style="padding: 50px 20px;">
-        <a href="index.html" class="btn-outline" style="margin-bottom: 20px;">&larr; Back to Portfolio</a>
-        
-        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">ActiveSub: Subscription & Trial Saver</h2>
-        <p style="color: var(--accent); font-weight: 600; margin-bottom: 40px;">Role: Cloud Systems Engineer | Tech Stack: API Gateway, Lambda, DynamoDB, EventBridge, SES</p>
 
-        <div class="case-study-content" style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start;">
-            
-            <div style="flex: 1; min-width: 300px;">
-                <h3>The Problem</h3>
-                <p>Consumers lose hundreds of dollars annually to forgotten free trials and auto-renewing subscriptions. Relying on calendar apps is manual and error-prone.</p>
-                
-                <h3>The AWS Architecture</h3>
-                <p>This tool utilizes a fully serverless, event-driven architecture to automate financial alerts:</p>
-                <ul>
-                    <li><strong>Data Persistence:</strong> User inputs are POSTed via API Gateway to an AWS Lambda function, which writes the expiration dates to a <strong>DynamoDB</strong> table.</li>
-                    <li><strong>Cron Jobs:</strong> <strong>Amazon EventBridge</strong> triggers a daily Lambda execution that scans the database for trials expiring within 48 hours.</li>
-                    <li><strong>Automated Alerts:</strong> When a match is found, <strong>Amazon SES</strong> (Simple Email Service) dispatches a formatted cancellation reminder directly to the user's inbox.</li>
-                </ul>
-            </div>
-
-            <div class="sub-workspace">
-                <div class="sub-header">
-                    <h4>Add New Tracker</h4>
-                </div>
-                
-                <div class="sub-form">
-                    <input type="text" id="sub-name" placeholder="Service Name (e.g., Spotify, Gym)" class="sub-input">
-                    <input type="date" id="sub-date" class="sub-input">
-                    <button class="btn" style="width: 100%; margin-top: 10px;" onclick="addSubscription()">Create EventBridge Alert</button>
-                    <div id="api-status" class="api-status hidden">✅ 200 OK: Written to DynamoDB</div>
-                </div>
-				
-				<div style="margin-top: 30px; padding-top: 20px; border-top: 1px dashed #cbd5e1;">
-    <h4 style="margin-bottom: 10px; color: #0284c7; font-size: 0.9rem;">🧪 Try the Live Demo</h4>
-    <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 10px;">Enter your info to instantly receive a mock AWS SES alert.</p>
-
-<div class="architecture-disclaimer">
-    <strong><span style="font-size: 1.1em;">☁️</span> Architecture Note:</strong> 
-    To maintain strict cloud security and prevent spam abuse, this serverless application operates within the <strong>AWS SES Sandbox</strong> environment. Live email dispatch is restricted to pre-authorized test accounts. I am fully prepared to conduct a live demonstration during the interview process!
-</div>
-					
-    <input type="text" id="demo-username" placeholder="Username (Optional)" class="sub-input" style="margin-bottom: 10px;">
-
-<input type="email" id="demo-email" placeholder="Your Email Address" class="sub-input">
-<button class="btn-outline" style="width: 100%;" onclick="sendDemoEmail()">Send Test Alert</button>
-<div id="demo-status" class="api-status hidden"></div>				
-</div>
-
-<div style="margin-top: 30px; padding-top: 20px; border-top: 1px dashed #cbd5e1;">
-    <h4 style="margin-bottom: 10px; color: #0f172a; font-size: 0.9rem;">📡 Live Architecture Testers</h4>
-    <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 15px;">Real-time DynamoDB feed of the last 20 users.</p>
-    
-    <div style="height: 180px; overflow: hidden; position: relative; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px;">
-        <div id="feed-scroll-box" style="position: absolute; width: 90%; transition: transform 0.5s ease; display: flex; flex-direction: column; gap: 10px;">
-            </div>
+    <div class="back-nav">
+        <a href="index.html" class="btn-outline">&larr; Back to Portfolio</a>
     </div>
-</div>
-                
-             
 
-    <script src="sub-saver.js"></script>
+    <div class="tool-wrapper">
+        <div class="tool-container">
+            <h1 class="tool-header">ActiveSub: Subscription & Trial Saver</h1>
+            <div class="tech-stack">Role: Cloud Systems Engineer | Tech Stack: <span>API Gateway, Lambda, DynamoDB, EventBridge, SES</span></div>
+            
+            <h3>The Problem</h3>
+            <p>Consumers lose hundreds of dollars annually to forgotten free trials and auto-renewing subscriptions. Relying on calendar apps is manual and error-prone.</p>
+            
+            <h3>The AWS Architecture</h3>
+            <p>This tool utilizes a fully serverless, event-driven architecture to automate financial alerts:</p>
+            <ul>
+                <li><strong>Data Persistence:</strong> User inputs are POSTed via API Gateway to an AWS Lambda function, which writes the expiration dates to a <strong>DynamoDB</strong> table.</li>
+                <li><strong>Cron Jobs:</strong> <strong>Amazon EventBridge</strong> triggers a daily Lambda execution that scans the database for trials expiring within 48 hours.</li>
+                <li><strong>Automated Alerts:</strong> When a match is found, <strong>Amazon SES</strong> (Simple Email Service) dispatches a formatted cancellation reminder directly to the user's inbox.</li>
+            </ul>
+
+            <div class="interactive-section">
+                <h3>Add New Tracker</h3>
+                <div class="form-group">
+                    <input type="text" id="serviceName" placeholder="Service Name (e.g., Spotify, Gym)">
+                    <input type="date" id="expirationDate">
+                </div>
+                <button class="action-btn" onclick="createAlert()">Create EventBridge Alert</button>
+                
+                <div class="success-msg" id="dbSuccess" style="display: block;">
+                    ✅ 200 OK: Written to DynamoDB
+                </div>
+            </div>
+
+            <hr class="dashed">
+
+            <div class="interactive-section" style="background: #ffffff; border: none; padding: 0; margin-top: 0;">
+                <h3>🧪 Try the Live Demo</h3>
+                <p style="margin-bottom: 5px;">Enter your info to instantly receive a mock AWS SES alert.</p>
+                
+                <div class="disclaimer">
+                    <strong>☁️ Architecture Note:</strong> To maintain strict cloud security and prevent spam abuse, this serverless application operates within the <strong>AWS SES Sandbox</strong> environment. Live email dispatch is restricted to pre-authorized test accounts. I am fully prepared to provision your email address for a live demonstration during the interview process!
+                </div>
+
+                <div class="form-group">
+                     <input type="text" id="demoUsername" placeholder="Username (Optional)">
+                    <input type="email" id="demoEmail" placeholder="Your Email Address">
+                </div>
+                <button class="action-btn outline" onclick="sendTestAlert()">Send Test Alert</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+       <script src="sub-saver.js"></script>
+    </script>
 </body>
 </html>
