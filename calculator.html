@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Calculator | Phillyp's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container" style="padding: 50px 20px;">
+        <a href="index.html" class="btn-outline" style="margin-bottom: 40px;">&larr; Back to Portfolio</a>
+        
+        <div class="calculator-wrapper">
+            <h2 style="text-align: center; margin-bottom: 20px;">Web Calculator</h2>
+            
+            <div class="calculator-ui">
+                <div class="calc-display" id="display">0</div>
+                <div class="calc-keypad">
+                    <button onclick="clearDisplay()" class="calc-btn clear">C</button>
+                    <button onclick="appendValue('/')" class="calc-btn op">&divide;</button>
+                    
+                    <button onclick="appendValue('7')" class="calc-btn">7</button>
+                    <button onclick="appendValue('8')" class="calc-btn">8</button>
+                    <button onclick="appendValue('9')" class="calc-btn">9</button>
+                    <button onclick="appendValue('*')" class="calc-btn op">&times;</button>
+                    
+                    <button onclick="appendValue('4')" class="calc-btn">4</button>
+                    <button onclick="appendValue('5')" class="calc-btn">5</button>
+                    <button onclick="appendValue('6')" class="calc-btn">6</button>
+                    <button onclick="appendValue('-')" class="calc-btn op">-</button>
+                    
+                    <button onclick="appendValue('1')" class="calc-btn">1</button>
+                    <button onclick="appendValue('2')" class="calc-btn">2</button>
+                    <button onclick="appendValue('3')" class="calc-btn">3</button>
+                    <button onclick="appendValue('+')" class="calc-btn op">+</button>
+                    
+                    <button onclick="appendValue('0')" class="calc-btn zero">0</button>
+                    <button onclick="appendValue('.')" class="calc-btn">.</button>
+                    <button onclick="calculateResult()" class="calc-btn equal">=</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="calculator.js"></script>
+</body>
+</html>

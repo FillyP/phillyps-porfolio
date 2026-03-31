@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Format Technical Audit Tool | Phillyp's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Specific styles just for the case study layout */
+        .case-study-content {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            margin-top: 20px;
+        }
+        .case-study-content h3 {
+            color: var(--accent);
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+        .case-study-content p, .case-study-content li {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        .case-study-content ul {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="padding: 50px 20px;">
+        <a href="index.html" class="btn-outline" style="margin-bottom: 20px;">&larr; Back to Portfolio</a>
+        
+        <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Multi-Format Technical Audit Tool</h2>
+
+        <div class="case-study-content">
+            
+            <div class="audit-workspace">
+                
+                <div class="file-upload-grid">
+                    <div class="upload-zone">
+                        <label>Dataset 1:</label>
+                        <input type="file" id="file1" class="file-input" accept=".txt,.csv,.json,.log">
+                    </div>
+                    <div class="upload-zone">
+                        <label>Dataset 2:</label>
+                        <input type="file" id="file2" class="file-input" accept=".txt,.csv,.json,.log">
+                    </div>
+                </div>
+
+                <div class="workspace-controls">
+                    <button class="btn" id="btn-diff">Show Differences</button>
+                    <button class="btn-outline" id="btn-sim">Show Similarities</button>
+                </div>
+
+                <div class="diff-viewer">
+                    <div class="pane">
+                        <div class="pane-header">Dataset 1 Output</div>
+                        <div id="pane1-content" class="pane-content">Awaiting file upload...</div>
+                    </div>
+                    <div class="pane">
+                        <div class="pane-header">Dataset 2 Output</div>
+                        <div id="pane2-content" class="pane-content">Awaiting file upload...</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>The Challenge</h3>
+            <p>Manual log troubleshooting and multi-format data comparisons were creating significant workflow bottlenecks. To maintain strict SLAs and operational efficiency, the team required an automated approach to verify technical feature parity and drastically reduce engineering toil.</p>
+
+            <h3>The Solution</h3>
+            <p>I designed and deployed a custom GUI application to automate this analysis process. Key features included:</p>
+            <ul>
+                <li><strong>Automated Analysis:</strong> Streamlined the comparison of multi-format datasets.</li>
+                <li><strong>Intuitive Workflow:</strong> Implemented "Show Difference" and "Show Similarities" toggles directly in the UI, allowing engineers to instantly isolate critical data points.</li>
+            </ul>
+
+            <h3>Cloud Infrastructure & Operationalization</h3>
+            <p>To ensure high availability and accommodate fluctuating departmental usage, I am currently architecting the tool's cloud deployment via <strong>AWS Elastic Beanstalk</strong>. Once operationalized, this infrastructure will enable seamless, automated scaling, providing a zero-maintenance, reliable backend for cross-team adoption.</p>
+			
+            <div style="margin-top: 40px; text-align: center;">
+                <a href="#" class="btn">View Source Code (GitHub)</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="audit-tool.js"></script>
+</body>
+</html>

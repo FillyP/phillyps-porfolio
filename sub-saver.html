@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Saver | Phillyp's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container" style="padding: 50px 20px;">
+        <a href="index.html" class="btn-outline" style="margin-bottom: 20px;">&larr; Back to Portfolio</a>
+        
+        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">ActiveSub: Subscription & Trial Saver</h2>
+        <p style="color: var(--accent); font-weight: 600; margin-bottom: 40px;">Role: Cloud Systems Engineer | Tech Stack: API Gateway, Lambda, DynamoDB, EventBridge, SES</p>
+
+        <div class="case-study-content" style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start;">
+            
+            <div style="flex: 1; min-width: 300px;">
+                <h3>The Problem</h3>
+                <p>Consumers lose hundreds of dollars annually to forgotten free trials and auto-renewing subscriptions. Relying on calendar apps is manual and error-prone.</p>
+                
+                <h3>The AWS Architecture</h3>
+                <p>This tool utilizes a fully serverless, event-driven architecture to automate financial alerts:</p>
+                <ul>
+                    <li><strong>Data Persistence:</strong> User inputs are POSTed via API Gateway to an AWS Lambda function, which writes the expiration dates to a <strong>DynamoDB</strong> table.</li>
+                    <li><strong>Cron Jobs:</strong> <strong>Amazon EventBridge</strong> triggers a daily Lambda execution that scans the database for trials expiring within 48 hours.</li>
+                    <li><strong>Automated Alerts:</strong> When a match is found, <strong>Amazon SES</strong> (Simple Email Service) dispatches a formatted cancellation reminder directly to the user's inbox.</li>
+                </ul>
+            </div>
+
+            <div class="sub-workspace">
+                <div class="sub-header">
+                    <h4>Add New Tracker</h4>
+                </div>
+                
+                <div class="sub-form">
+                    <input type="text" id="sub-name" placeholder="Service Name (e.g., Spotify, Gym)" class="sub-input">
+                    <input type="date" id="sub-date" class="sub-input">
+                    <button class="btn" style="width: 100%; margin-top: 10px;" onclick="addSubscription()">Create EventBridge Alert</button>
+                    <div id="api-status" class="api-status hidden">✅ 200 OK: Written to DynamoDB</div>
+                </div>
+				
+				<div style="margin-top: 30px; padding-top: 20px; border-top: 1px dashed #cbd5e1;">
+    <h4 style="margin-bottom: 10px; color: #0284c7; font-size: 0.9rem;">🧪 Try the Live Demo</h4>
+    <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 10px;">Enter your info to instantly receive a mock AWS SES alert.</p>
+    
+    <input type="text" id="demo-username" placeholder="Username (Optional)" class="sub-input" style="margin-bottom: 10px;">
+    
+    <input type="email" id="demo-email" placeholder="Your Email Address" class="sub-input">
+    <button class="btn-outline" style="width: 100%;" onclick="sendDemoEmail()">Send Test Alert</button>
+    <div id="demo-status" class="api-status hidden"></div>
+</div>
+
+<div style="margin-top: 30px; padding-top: 20px; border-top: 1px dashed #cbd5e1;">
+    <h4 style="margin-bottom: 10px; color: #0f172a; font-size: 0.9rem;">📡 Live Architecture Testers</h4>
+    <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 15px;">Real-time DynamoDB feed of the last 20 users.</p>
+    
+    <div style="height: 180px; overflow: hidden; position: relative; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px;">
+        <div id="feed-scroll-box" style="position: absolute; width: 90%; transition: transform 0.5s ease; display: flex; flex-direction: column; gap: 10px;">
+            </div>
+    </div>
+</div>
+                
+             
+
+    <script src="sub-saver.js"></script>
+</body>
+</html>

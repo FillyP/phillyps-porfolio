@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Network Architecture | Phillyp's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container" style="padding: 50px 20px;">
+        <a href="index.html" class="btn-outline" style="margin-bottom: 20px;">&larr; Back to Portfolio</a>
+        
+        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Retail Network Architecture & Traffic Flow</h2>
+        <p style="color: var(--accent); font-weight: 600; margin-bottom: 40px;">Role: Systems Engineer | Concepts: CCENT, VLAN Routing, Network Topologies</p>
+
+        <div class="case-study-content">
+            <p>This interactive topology demonstrates a standard installation for a retail grocery environment. The network is segmented into secure VLANs separating Point of Sale (POS) systems, Back Office infrastructure, and Guest Wi-Fi to ensure PCI compliance and operational security.</p>
+            
+            <div class="network-workspace">
+                <div class="network-controls">
+                    <h4>Traffic Simulations</h4>
+                    <button class="btn" onclick="runSimulation('pos-to-server')">Ping: POS to Server</button>
+                    <button class="btn-outline" onclick="runSimulation('guest-to-wan')">Flow: Guest to Internet</button>
+                    <div id="sim-status" style="margin-top: 15px; font-family: monospace; color: #38bdf8; height: 20px;">System Ready...</div>
+                </div>
+
+                <div class="network-canvas" id="canvas">
+                    <svg class="cables">
+                        <line x1="300" y1="60" x2="300" y2="140" />
+                        <line x1="300" y1="140" x2="150" y2="240" />
+                        <line x1="300" y1="140" x2="450" y2="240" />
+                        <line x1="150" y1="240" x2="100" y2="340" />
+                        <line x1="450" y1="240" x2="500" y2="340" />
+                    </svg>
+
+                    <div class="node" style="left: 270px; top: 20px;" id="node-router">
+                        <div class="icon">🔄</div><span>Gateway Router<br><small>10.0.0.1</small></span>
+                    </div>
+                    
+                    <div class="node" style="left: 270px; top: 120px;" id="node-core">
+                        <div class="icon">🖧</div><span>Core Switch<br><small>Trunk</small></span>
+                    </div>
+                    
+                    <div class="node" style="left: 120px; top: 220px;" id="node-pos-sw">
+                        <div class="icon">🖧</div><span>Switch A<br><small>VLAN 10</small></span>
+                    </div>
+                    
+                    <div class="node" style="left: 420px; top: 220px;" id="node-off-sw">
+                        <div class="icon">🖧</div><span>Switch B<br><small>VLAN 20</small></span>
+                    </div>
+                    
+                    <div class="node" style="left: 70px; top: 320px;" id="node-pos1">
+                        <div class="icon">🛒</div><span>Register 1<br><small>10.0.10.5</small></span>
+                    </div>
+                    
+                    <div class="node" style="left: 470px; top: 320px;" id="node-server">
+                        <div class="icon">🗄️</div><span>Inv Server<br><small>10.0.20.100</small></span>
+                    </div>
+
+                    <div id="packet" class="packet hidden"></div>
+                </div>
+            </div>
+
+            <h3>Architectural Highlights</h3>
+            <ul>
+                <li><strong>Inter-VLAN Routing:</strong> The Gateway Router utilizes sub-interfaces to route traffic between the isolated POS VLAN and the Back Office VLAN, allowing registers to check inventory without exposing the database to the public internet.</li>
+                <li><strong>Broadcast Domain Isolation:</strong> Utilizing managed switches to confine broadcast traffic, drastically reducing network congestion and preventing unauthorized lateral movement.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="network-map.js"></script>
+</body>
+</html>
