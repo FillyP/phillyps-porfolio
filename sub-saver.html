@@ -10,9 +10,7 @@
         /* ========================================= */
         /* ISOLATED ACTIVESUB STYLES                 */
         /* ========================================= */
-        body {
-            background-color: #f8fafc !important; 
-        }
+        body { background-color: #f8fafc !important; }
 
         .back-nav {
             max-width: 900px;
@@ -56,7 +54,6 @@
             font-weight: 600;
         }
 
-        /* Article Formatting */
         h3 {
             color: #1a1a1a;
             margin-bottom: 10px;
@@ -71,13 +68,8 @@
             font-size: 1.05rem;
         }
 
-        ul {
-            padding-left: 25px;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
+        ul { padding-left: 25px; }
+        li { margin-bottom: 8px; }
 
         /* Form Layouts */
         .interactive-section {
@@ -129,7 +121,6 @@
         .action-btn:hover {
             background: #0052a3;
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
         }
 
         .action-btn.outline {
@@ -141,17 +132,6 @@
         .action-btn.outline:hover {
             background: #0066cc;
             color: #ffffff;
-        }
-
-        /* Success & Disclaimers */
-        .success-msg {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #16a34a;
-            font-weight: 600;
-            margin-top: 15px;
-            font-size: 0.95rem;
         }
 
         .disclaimer {
@@ -168,6 +148,58 @@
             border: 0;
             border-top: 2px dashed #e2e8f0;
             margin: 40px 0;
+        }
+
+        /* Classes needed by your Javascript */
+        .hidden { display: none !important; }
+        
+        #api-status, #demo-status {
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .sub-item {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sub-info strong { display: block; color: #1a1a1a; }
+        .sub-info small { color: #64748b; }
+        
+        .status-badge.new {
+            background: #dcfce7;
+            color: #166534;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Live Feed Box */
+        .feed-container {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            height: 150px;
+            overflow: hidden; /* Important for your JS animation */
+            padding: 10px;
+            margin-top: 15px;
+        }
+
+        #feed-scroll-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         @media (max-width: 768px) {
@@ -201,14 +233,13 @@
             <div class="interactive-section">
                 <h3>Add New Tracker</h3>
                 <div class="form-group">
-                    <input type="text" id="serviceName" placeholder="Service Name (e.g., Spotify, Gym)">
-                    <input type="date" id="expirationDate">
+                    <input type="text" id="sub-name" placeholder="Service Name (e.g., Spotify, Gym)">
+                    <input type="date" id="sub-date">
                 </div>
-                <button class="action-btn" onclick="createAlert()">Create EventBridge Alert</button>
+                <button class="action-btn" onclick="addSubscription()">Create EventBridge Alert</button>
                 
-                <div class="success-msg" id="dbSuccess" style="display: block;">
-                    ✅ 200 OK: Written to DynamoDB
-                </div>
+                <div id="api-status" class="hidden"></div>
+                <div id="sub-list"></div>
             </div>
 
             <hr class="dashed">
@@ -222,17 +253,23 @@
                 </div>
 
                 <div class="form-group">
-                     <input type="text" id="demoUsername" placeholder="Username (Optional)">
-                    <input type="email" id="demoEmail" placeholder="Your Email Address">
+                    <input type="text" id="demo-username" placeholder="Username (Optional)">
+                    <input type="email" id="demo-email" placeholder="Your Email Address">
                 </div>
-                <button class="action-btn outline" onclick="sendTestAlert()">Send Test Alert</button>
+                <button class="action-btn outline" onclick="sendDemoEmail()">Send Test Alert</button>
+                <div id="demo-status" class="hidden"></div>
+                
+                <h4 style="margin-top: 30px; color: #1a1a1a; font-family: 'Aptos Display', sans-serif;">📡 Live Architecture Testers</h4>
+                <p style="font-size: 0.85rem; color: #64748b;">Real-time DynamoDB feed of recent users.</p>
+                <div class="feed-container">
+                    <div id="feed-scroll-box"></div>
+                </div>
+
             </div>
 
         </div>
     </div>
 
-    <script>
-       <script src="sub-saver.js"></script>
-    </script>
+    <script src="sub-saver.js"></script>
 </body>
 </html>
