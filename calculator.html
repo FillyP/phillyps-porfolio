@@ -5,44 +5,203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Calculator | Phillyp's Portfolio</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================= */
+        /* ISOLATED CALCULATOR STYLES                */
+        /* ========================================= */
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+            min-height: 100vh;
+            background-color: #f8fafc; /* Very light gray background */
+        }
+
+        .back-nav {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .calculator-container {
+            background-color: #ffffff;
+            width: 320px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+        }
+
+        .calc-header {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        #display {
+            background-color: #f1f5f9;
+            color: #333333;
+            font-size: 2.5rem;
+            text-align: right;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+            font-family: monospace;
+        }
+
+        .keys {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .keys button {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            color: #333333;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 15px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .keys button:hover {
+            background-color: #f8fafc;
+            border-color: #0066cc;
+            transform: translateY(-1px);
+        }
+
+        .keys button:active {
+            transform: translateY(1px);
+        }
+
+        .keys .operator {
+            background-color: #e0f2fe;
+            color: #0066cc;
+            border-color: #bae6fd;
+        }
+
+        .keys .operator:hover {
+            background-color: #bae6fd;
+        }
+
+        .keys .clear {
+            background-color: #fee2e2;
+            color: #dc2626;
+            border-color: #fecaca;
+        }
+
+        .keys .equals {
+            background-color: #0066cc;
+            color: #ffffff;
+            border-color: #0066cc;
+            grid-column: span 2;
+        }
+
+        .keys .equals:hover {
+            background-color: #0052a3;
+        }
+
+        .keys .zero {
+            grid-column: span 2;
+        }
+    </style>
 </head>
 <body>
-    <div class="container" style="padding: 50px 20px;">
-        <a href="index.html" class="btn-outline" style="margin-bottom: 40px;">&larr; Back to Portfolio</a>
-        
-        <div class="calculator-wrapper">
-            <h2 style="text-align: center; margin-bottom: 20px;">Web Calculator</h2>
+
+    <div class="back-nav">
+        <a href="index.html" class="btn-outline">&larr; Back to Portfolio</a>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="calculator-container">
+            <div class="calc-header">Web Calculator</div>
             
-            <div class="calculator-ui">
-                <div class="calc-display" id="display">0</div>
-                <div class="calc-keypad">
-                    <button onclick="clearDisplay()" class="calc-btn clear">C</button>
-                    <button onclick="appendValue('/')" class="calc-btn op">&divide;</button>
-                    
-                    <button onclick="appendValue('7')" class="calc-btn">7</button>
-                    <button onclick="appendValue('8')" class="calc-btn">8</button>
-                    <button onclick="appendValue('9')" class="calc-btn">9</button>
-                    <button onclick="appendValue('*')" class="calc-btn op">&times;</button>
-                    
-                    <button onclick="appendValue('4')" class="calc-btn">4</button>
-                    <button onclick="appendValue('5')" class="calc-btn">5</button>
-                    <button onclick="appendValue('6')" class="calc-btn">6</button>
-                    <button onclick="appendValue('-')" class="calc-btn op">-</button>
-                    
-                    <button onclick="appendValue('1')" class="calc-btn">1</button>
-                    <button onclick="appendValue('2')" class="calc-btn">2</button>
-                    <button onclick="appendValue('3')" class="calc-btn">3</button>
-                    <button onclick="appendValue('+')" class="calc-btn op">+</button>
-                    
-                    <button onclick="appendValue('0')" class="calc-btn zero">0</button>
-                    <button onclick="appendValue('.')" class="calc-btn">.</button>
-                    <button onclick="calculateResult()" class="calc-btn equal">=</button>
-                </div>
+            <div id="display">0</div>
+            
+            <div class="keys">
+                <button class="clear" onclick="clearDisplay()">C</button>
+                <button class="operator" onclick="appendValue('(')">(</button>
+                <button class="operator" onclick="appendValue(')')">)</button>
+                <button class="operator" onclick="appendValue('/')">&divide;</button>
+                
+                <button onclick="appendValue('7')">7</button>
+                <button onclick="appendValue('8')">8</button>
+                <button onclick="appendValue('9')">9</button>
+                <button class="operator" onclick="appendValue('*')">&times;</button>
+                
+                <button onclick="appendValue('4')">4</button>
+                <button onclick="appendValue('5')">5</button>
+                <button onclick="appendValue('6')">6</button>
+                <button class="operator" onclick="appendValue('-')">&minus;</button>
+                
+                <button onclick="appendValue('1')">1</button>
+                <button onclick="appendValue('2')">2</button>
+                <button onclick="appendValue('3')">3</button>
+                <button class="operator" onclick="appendValue('+')">+</button>
+                
+                <button class="zero" onclick="appendValue('0')">0</button>
+                <button onclick="appendValue('.')">.</button>
+                <button class="equals" onclick="calculate()">=</button>
             </div>
         </div>
     </div>
 
-    <script src="calculator.js"></script>
+    <script>
+        /* ========================================= */
+        /* CALCULATOR LOGIC                          */
+        /* ========================================= */
+        const display = document.getElementById('display');
+        let currentInput = '0';
+
+        function updateDisplay() {
+            // Replace operators with prettier symbols for the display only
+            let prettyInput = currentInput.replace(/\*/g, '×').replace(/\//g, '÷');
+            display.innerText = prettyInput;
+        }
+
+        function appendValue(value) {
+            if (currentInput === '0' && value !== '.') {
+                currentInput = value;
+            } else {
+                currentInput += value;
+            }
+            updateDisplay();
+        }
+
+        function clearDisplay() {
+            currentInput = '0';
+            updateDisplay();
+        }
+
+        function calculate() {
+            try {
+                // Safely evaluate the mathematical string
+                // Note: Using Function constructor is slightly safer than raw eval() here
+                let result = new Function('return ' + currentInput)();
+                
+                // Handle decimals getting too long
+                if (!Number.isInteger(result)) {
+                    result = parseFloat(result.toFixed(6)); 
+                }
+                
+                currentInput = String(result);
+                updateDisplay();
+            } catch (error) {
+                display.innerText = "Error";
+                currentInput = '0';
+            }
+        }
+    </script>
 </body>
 </html>
