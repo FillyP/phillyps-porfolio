@@ -1,3 +1,7 @@
+/* The fallback font if all else fails */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+
 :root {
     --bg-dark: #0f172a;
     --bg-darker: #020617;
@@ -773,4 +777,47 @@ footer {
 .status-badge.new {
     background: #dcfce7;
     color: #166534;
+}
+
+
+/* The Font Stack & Light Mode Colors */
+body {
+    background-color: #ffffff; /* Crisp white paper background */
+    color: #333333; /* Dark charcoal text for high contrast but low eye-strain */
+    font-family: 'Aptos', 'Inter', -apple-system, sans-serif;
+}
+
+h1, h2, h3, h4, .logo {
+    font-family: 'Aptos Display', 'Inter', -apple-system, sans-serif;
+    color: #1a1a1a; /* Almost black for headers */
+}
+
+/* Tone down the neon blue to a corporate AWS blue */
+h2, .logo {
+    color: #0052cc !important; 
+}
+
+/* The Signature Styling */
+.document-signature {
+    max-width: 250px; /* Keeps it reasonably sized */
+    display: block;
+    margin-top: 30px;
+    mix-blend-mode: multiply; /* This makes the white background of the image blend perfectly */
+}
+
+/* Fix the Navbar for Light Mode */
+nav {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e0e0e0; /* Crisp line like a document header */
+}
+
+nav a {
+    color: #333333 !important;
+    font-weight: 600;
+}
+
+/* Clean up the Profile Picture */
+#about img[alt="Phillyp"] {
+    border: 3px solid #e0e0e0; /* Removes neon glow, adds clean grey border */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Very subtle paper shadow */
 }
