@@ -11,7 +11,7 @@
         /* ISOLATED AUDIT TOOL STYLES                */
         /* ========================================= */
         body {
-            background-color: #f8fafc !important; /* Forces light gray background */
+            background-color: #f8fafc !important; 
         }
 
         .back-nav {
@@ -40,32 +40,42 @@
             margin-bottom: 30px;
             font-family: 'Aptos Display', 'Inter', sans-serif;
             font-weight: 700;
+            text-align: center;
         }
 
-        /* Input Section */
+        .datasets-wrapper {
+            display: flex;
+            flex-direction: row; 
+            justify-content: center; 
+            gap: 30px; 
+            margin-bottom: 25px;
+            flex-wrap: nowrap; 
+        }
+
         .file-input-group {
-            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
+            white-space: nowrap; 
         }
 
         .file-input-group label {
             font-weight: 600;
             color: #333333;
-            width: 90px;
         }
 
         input[type="file"] {
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             color: #475569;
+            cursor: pointer; 
+            max-width: 220px; 
         }
 
-        /* Toggle Buttons */
         .controls {
             margin: 25px 0;
             display: flex;
+            justify-content: center; 
             gap: 15px;
         }
 
@@ -94,7 +104,9 @@
             background: #f0f7ff;
         }
 
-        /* Mock Output Displays */
+        /* ========================================= */
+        /* NOTEPAD++ EDITOR & HIGHLIGHT STYLES       */
+        /* ========================================= */
         .output-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -106,17 +118,102 @@
             color: #333333;
             margin-bottom: 10px;
             font-size: 0.95rem;
+            text-align: center;
         }
 
         .output-box {
-            background: #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
             border: 1px solid #cbd5e1;
             border-radius: 6px;
-            padding: 15px;
-            min-height: 120px;
-            font-family: monospace;
-            font-size: 0.9rem;
+            min-height: 200px;
+            overflow: hidden; 
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .file-meta {
+            background: #f1f5f9;
+            border-bottom: 1px solid #cbd5e1;
+            padding: 8px 15px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #333333;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .editor-window {
+            flex: 1;
+            overflow: auto; 
+            max-height: 400px;
+            background: #ffffff;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 0.85rem;
+            color: #1a1a1a;
+            counter-reset: line; 
+        }
+
+        .editor-line {
+            display: flex;
+            white-space: pre; 
+            transition: background-color 0.2s ease;
+        }
+
+        .editor-line:hover {
+            background: #e8f2fc; 
+        }
+
+        .line-num {
+            counter-increment: line;
+            flex-shrink: 0;
+            width: 45px;
+            text-align: right;
+            padding-right: 10px;
+            margin-right: 10px;
             color: #64748b;
+            background-color: #f8fafc;
+            border-right: 1px solid #cbd5e1;
+            user-select: none; 
+        }
+
+        .line-num::before {
+            content: counter(line);
+        }
+
+        .line-content {
+            padding-right: 15px;
+        }
+
+        .placeholder-text {
+            padding: 20px;
+            color: #64748b;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+        }
+
+        .highlight-diff {
+            background-color: #fef2f2; 
+            color: #991b1b;
+        }
+        .highlight-diff .line-num {
+            background-color: #fee2e2;
+            color: #dc2626;
+            border-color: #fca5a5;
+        }
+
+        .highlight-sim {
+            background-color: #f0fdf4; 
+            color: #166534;
+        }
+        .highlight-sim .line-num {
+            background-color: #dcfce7;
+            color: #16a34a;
+            border-color: #86efac;
+        }
+
+        .dim-text {
+            opacity: 0.35;
         }
 
         /* Write-up Article Section */
@@ -140,17 +237,13 @@
             font-size: 1.05rem;
         }
 
-        .article-section ul {
-            padding-left: 25px;
-        }
-        
-        .article-section li {
-            margin-bottom: 8px;
-        }
+        .article-section ul { padding-left: 25px; }
+        .article-section li { margin-bottom: 8px; }
 
         @media (max-width: 768px) {
             .output-grid { grid-template-columns: 1fr; }
             .tool-container { padding: 20px; }
+            .datasets-wrapper { flex-wrap: wrap; }
         }
     </style>
 </head>
@@ -164,13 +257,15 @@
         <div class="tool-container">
             <h1 class="tool-header">Multi-Format Technical Audit Tool</h1>
             
-            <div class="file-input-group">
-                <label>Dataset 1:</label>
-                <input type="file" disabled title="File upload disabled in portfolio demo mode">
-            </div>
-            <div class="file-input-group">
-                <label>Dataset 2:</label>
-                <input type="file" disabled title="File upload disabled in portfolio demo mode">
+            <div class="datasets-wrapper">
+                <div class="file-input-group">
+                    <label>Dataset 1:</label>
+                    <input type="file" id="file-1" accept=".txt,.csv,.json,.log,.xml,.html">
+                </div>
+                <div class="file-input-group">
+                    <label>Dataset 2:</label>
+                    <input type="file" id="file-2" accept=".txt,.csv,.json,.log,.xml,.html">
+                </div>
             </div>
 
             <div class="controls">
@@ -181,11 +276,15 @@
             <div class="output-grid">
                 <div class="output-col">
                     <h4>Dataset 1 Output</h4>
-                    <div class="output-box" id="out-1">Awaiting file upload...</div>
+                    <div class="output-box" id="out-1">
+                        <div class="placeholder-text">Awaiting file upload...</div>
+                    </div>
                 </div>
                 <div class="output-col">
                     <h4>Dataset 2 Output</h4>
-                    <div class="output-box" id="out-2">Awaiting file upload...</div>
+                    <div class="output-box" id="out-2">
+                        <div class="placeholder-text">Awaiting file upload...</div>
+                    </div>
                 </div>
             </div>
 
@@ -207,19 +306,135 @@
     </div>
 
     <script>
-        /* Simple mock logic to make the toggles switch styles visually for recruiters */
-        function toggleView(view) {
-            const btnDiff = document.getElementById('btn-diff');
-            const btnSim = document.getElementById('btn-sim');
+        /* ========================================= */
+        /* UPGRADED CROSS-REFERENCE ENGINE           */
+        /* ========================================= */
+        
+        let file1Data = { name: "", lines: [] };
+        let file2Data = { name: "", lines: [] };
+        let currentMode = 'diff'; 
 
-            if (view === 'diff') {
-                btnDiff.className = 'toggle-btn active';
-                btnSim.className = 'toggle-btn inactive';
-            } else {
-                btnDiff.className = 'toggle-btn inactive';
-                btnSim.className = 'toggle-btn active';
-            }
+        function handleFileUpload(event, fileNum) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                const lines = text.split(/\r\n|\r|\n/);
+                
+                if (fileNum === 1) {
+                    file1Data.name = file.name;
+                    file1Data.lines = lines;
+                } else {
+                    file2Data.name = file.name;
+                    file2Data.lines = lines;
+                }
+                
+                renderEditors();
+            };
+            reader.readAsText(file);
         }
+
+        function toggleView(view) {
+            currentMode = view;
+            document.getElementById('btn-diff').className = (view === 'diff') ? 'toggle-btn active' : 'toggle-btn inactive';
+            document.getElementById('btn-sim').className = (view === 'sim') ? 'toggle-btn active' : 'toggle-btn inactive';
+            renderEditors();
+        }
+
+        function renderEditors() {
+            renderPane(1, file1Data, file2Data);
+            renderPane(2, file2Data, file1Data);
+        }
+
+        function escapeHtml(unsafe) {
+            if (unsafe === undefined || unsafe === null) return "";
+            return unsafe.toString()
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function renderPane(paneNum, primaryData, secondaryData) {
+            const outputBox = document.getElementById('out-' + paneNum);
+            
+            if (primaryData.lines.length === 0) {
+                outputBox.innerHTML = '<div class="placeholder-text">Awaiting file upload...</div>';
+                return;
+            }
+
+            const MAX_LINES = 3000;
+            const displayCount = Math.min(primaryData.lines.length, MAX_LINES);
+
+            let htmlContent = `
+                <div class="file-meta">
+                    <span><strong>File:</strong> ${primaryData.name}</span>
+                    <span><strong>Lines:</strong> ${primaryData.lines.length}</span>
+                </div>
+                <div class="editor-window">
+            `;
+
+            // OPTIMIZATION: Build a high-speed dictionary of all lines in the OTHER file.
+            // We trim spaces and remove completely blank lines so they don't cause false positives.
+            const secondaryLinesSet = new Set(
+                secondaryData.lines.map(line => line.trim()).filter(line => line !== "")
+            );
+
+            for (let i = 0; i < displayCount; i++) {
+                const rawLine = primaryData.lines[i];
+                let safeText = escapeHtml(rawLine);
+                if (safeText === "") safeText = " "; 
+
+                let isMatch = false;
+                let lineClass = "editor-line";
+
+                if (primaryData.lines.length > 0 && secondaryData.lines.length > 0) {
+                    const trimmedLine = rawLine.trim();
+                    
+                    // Cross-Reference Check: Does this line exist ANYWHERE in the other file?
+                    if (trimmedLine !== "") {
+                        isMatch = secondaryLinesSet.has(trimmedLine);
+                    }
+
+                    if (currentMode === 'diff') {
+                        // Highlight lines that DO NOT exist in the other file
+                        if (!isMatch && trimmedLine !== "") lineClass += " highlight-diff";
+                        else lineClass += " dim-text";
+                    } else if (currentMode === 'sim') {
+                        // Highlight lines that DO exist in the other file
+                        if (isMatch && trimmedLine !== "") lineClass += " highlight-sim";
+                        else lineClass += " dim-text";
+                    }
+                }
+
+                htmlContent += `
+                    <div class="${lineClass}">
+                        <span class="line-num"></span>
+                        <span class="line-content">${safeText}</span>
+                    </div>
+                `;
+            }
+
+            if (primaryData.lines.length > MAX_LINES) {
+                htmlContent += `
+                    <div class="editor-line">
+                        <span class="line-num"></span>
+                        <span class="line-content" style="color: #dc2626; font-style: italic;">... [Truncated for browser performance] ...</span>
+                    </div>
+                `;
+            }
+
+            htmlContent += `</div>`;
+            outputBox.innerHTML = htmlContent;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById('file-1').addEventListener('change', (e) => handleFileUpload(e, 1));
+            document.getElementById('file-2').addEventListener('change', (e) => handleFileUpload(e, 2));
+        });
     </script>
 </body>
 </html>
