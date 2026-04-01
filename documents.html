@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Documents | Phillyp's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* ========================================= */
+        /* ISOLATED DOCUMENT VIEWER STYLES           */
+        /* ========================================= */
+        body {
+            background-color: #f8fafc !important; 
+        }
+
+        /* 1. PASSCODE OVERLAY STYLES */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(248, 250, 252, 0.85); /* Frosted glass effect */
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.4s ease;
+        }
+
+        .passcode-box {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .passcode-box h3 {
+            color: #333333;
+            margin-bottom: 10px;
+            font-family: 'Aptos Display', 'Inter', sans-serif;
+        }
+
+        .passcode-box p {
+            color: #475569;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .passcode-box input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .passcode-box input:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        /* 2. HIDE MAIN CONTENT INITIALLY */
+        .doc-wrapper, .back-nav {
+            display: none; 
+        }
+
+        /* 3. STANDARD DOC STYLES */
+        .back-nav {
+            max-width: 1200px;
+            margin: 40px auto 20px auto;
+            padding: 0 20px;
+        }
+
+        .doc-wrapper {
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto 60px auto;
+            padding: 0 20px;
+            gap: 20px;
+            min-height: 75vh;
+        }
+
+        .doc-sidebar {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            align-self: flex-start;
+        }
+
+        .doc-sidebar h3 {
+            margin-bottom: 20px;
+            color: #333333;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        .doc-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 14px;
+            margin-bottom: 12px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            color: #475569;
+            font-family: 'Aptos', 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .doc-btn:hover {
+            border-color: #0066cc;
+            color: #0066cc;
+            background: #f8fafc;
+            transform: translateX(3px);
+        }
+
+        .doc-btn.active {
+            background: #e0f2fe;
+            border-color: #0066cc;
+            color: #0066cc;
+            border-left: 4px solid #0066cc;
+        }
+
+        .doc-viewer {
+            flex: 3;
+            min-width: 300px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .doc-viewer iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 800px;
+            border: none;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .doc-sidebar {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="passcode-overlay" class="overlay">
+        <div class="passcode-box">
+            <h3>Confidential Documents</h3>
+            <p>Please enter the access code provided in my application to view these engineering files.</p>
+            
+            <input type="password" id="passcodeInput" placeholder="Enter Passcode" onkeypress="handleKeyPress(event)">
+            <p id="errorMessage" style="color: #dc2626; font-size: 0.85rem; display: none; margin-top: 10px; font-weight: 600;">Incorrect passcode. Please try again.</p>
+            
+            <button onclick="checkPasscode()" class="btn" style="margin-top: 20px; width: 100%; border: none; cursor: pointer;">Unlock Documents</button>
+            
+            <a href="index.html" style="display: block; margin-top: 20px; color: #64748b; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color 0.2s ease;" onmouseover="this.style.color='#0066cc'" onmouseout="this.style.color='#64748b'">&larr; Return to Portfolio</a>
+        </div>
+    </div>
+
+
+
+    <div class="back-nav">
+        <a href="index.html" class="btn-outline">&larr; Back to Portfolio</a>
+    </div>
+
+    <div class="doc-wrapper">
+        <div class="doc-sidebar">
+            <h3>Technical Portfolio</h3>
+            <button class="doc-btn active" onclick="loadDoc('Database Migration - DSHOP.pdf', this)">SQL Database Migration</button>
+            <button class="doc-btn" onclick="loadDoc('UAT- Item Maintenance.pdf', this)">UAT: Item Maintenance</button>
+            <button class="doc-btn" onclick="loadDoc('EFT UAT -FCB VX820.pdf', this)">UAT: EFT Payment Terminal</button>
+            <button class="doc-btn" onclick="loadDoc('Recipe Manual.pdf', this)">User Guide: Recipe Costing</button>
+        </div>
+        
+        <div class="doc-viewer">
+            <iframe id="pdf-frame" src="Database Migration - DSHOP.pdf" title="Document Viewer"></iframe>
+        </div>
+    </div>
+
+    <script>
+        /* ========================================= */
+        /* 1. PASSCODE LOGIC                         */
+        /* ========================================= */
+        
+        // PASSCODE
+        const secretCode = "HireMe2026"; 
+
+        function checkPasscode() {
+            const input = document.getElementById('passcodeInput').value;
+            const errorMsg = document.getElementById('errorMessage');
+
+            if (input === secretCode) {
+                // Fade out the overlay
+                const overlay = document.getElementById('passcode-overlay');
+                overlay.style.opacity = '0';
+                
+                // Show the documents after fade out finishes
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    document.querySelector('.doc-wrapper').style.display = 'flex';
+                    document.querySelector('.back-nav').style.display = 'block';
+                }, 400); 
+
+            } else {
+                // Show error and clear input
+                errorMsg.style.display = 'block';
+                document.getElementById('passcodeInput').value = ''; 
+            }
+        }
+
+        // Allows hitting 'Enter' on the keyboard to submit
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') {
+                checkPasscode();
+            }
+        }
+
+        /* ========================================= */
+        /* 2. PDF SWITCHING LOGIC                    */
+        /* ========================================= */
+        function loadDoc(filename, btnElement) {
+            document.getElementById('pdf-frame').src = filename;
+            
+            let buttons = document.getElementsByClassName('doc-btn');
+            for(let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+            btnElement.classList.add('active');
+        }
+    </script>
+</body>
+</html>
