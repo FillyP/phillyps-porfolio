@@ -1,0 +1,44 @@
+{
+  "description": "Label a pull request: kind, size, risk, and whether tests or docs look missing. State: PR title, body, changed file list and diff (or diffstat).",
+  "questions": {
+    "kind": {
+      "type": "choice",
+      "instructions": "What kind of change is this pull request mainly?",
+      "criteria": {
+        "bug-fix": "Fixes something that was broken or behaving wrongly",
+        "feature": "Adds new behavior or a new capability",
+        "docs": "Only changes documentation, comments or READMEs",
+        "refactor": "Restructures code without changing what it does",
+        "tests": "Only adds or changes tests",
+        "maintenance": "Dependencies, CI, build, config or tooling"
+      }
+    },
+    "size": {
+      "type": "score",
+      "instructions": "How big is this change for a reviewer?",
+      "criteria": [
+        "Tiny: a few lines, reviewable at a glance",
+        "Small: one area, a few minutes to review",
+        "Medium: several files or areas, needs a careful read",
+        "Large: many files or a new subsystem, needs a long review"
+      ]
+    },
+    "risk": {
+      "type": "score",
+      "instructions": "If this change has a bug, how bad would the impact be?",
+      "criteria": [
+        "Low: docs, tests, or code that is easy to undo and affects little",
+        "Medium: changes app behavior that users or other code rely on",
+        "High: touches data, auth, payments, deletion, secrets, or deployment"
+      ]
+    },
+    "missing_tests": {
+      "type": "noul",
+      "instructions": "Does this pull request change program behavior without adding or updating any tests?"
+    },
+    "docs_needed": {
+      "type": "noul",
+      "instructions": "Does this pull request change setup steps, commands or user-facing behavior that the README or docs should mention but do not?"
+    }
+  }
+}

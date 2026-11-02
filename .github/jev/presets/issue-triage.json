@@ -1,0 +1,33 @@
+{
+  "description": "Label a GitHub issue: kind, priority, and whether it is ready to work on. State: issue title and body.",
+  "questions": {
+    "kind": {
+      "type": "choice",
+      "instructions": "What is this issue mainly about?",
+      "criteria": {
+        "bug": "Something is broken or behaves wrongly",
+        "feature": "A request for new behavior",
+        "question": "Someone asking how something works or for help",
+        "docs": "Missing or wrong documentation",
+        "chore": "Cleanup, dependencies, tooling or maintenance"
+      }
+    },
+    "priority": {
+      "type": "score",
+      "instructions": "How urgently should this issue be handled?",
+      "criteria": [
+        "Low: nice to have, no one is blocked",
+        "Medium: should be handled soon, a workaround exists",
+        "High: blocks someone, loses data, or breaks the main use of the project"
+      ]
+    },
+    "has_repro": {
+      "type": "noul",
+      "instructions": "Does the issue give steps, input or an error message that would let someone reproduce the problem?"
+    },
+    "needs_info": {
+      "type": "noul",
+      "instructions": "Is the issue missing details someone would need before they could start working on it?"
+    }
+  }
+}
