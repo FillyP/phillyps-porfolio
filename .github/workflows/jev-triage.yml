@@ -1,0 +1,40 @@
+# Labels new pull requests and issues with Jev (kind, size, risk, needs-tests...).
+# Needs one repository secret: TYPESAFE_API_KEY, AI_GATEWAY_API_KEY or OPENROUTER_API_KEY.
+# Without a secret the job exits quietly. Installed from FillyP/jev 0dd57f5
+# by scripts/install-triage.mjs; rerun it there to update, don't edit here.
+# Runs only for pull requests from this repo's own branches and for issues opened
+# by the owner or collaborators, never for strangers (FillyP/github security.md).
+name: Jev triage
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  triage:
+    if: >-
+      (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) ||
+      (github.event_name == 'issues' && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association))
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # Pinned to an exact commit (actions/checkout v7.0.1), per the playbook.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Label with Jev
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+          AI_GATEWAY_API_KEY: ${{ secrets.AI_GATEWAY_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          KIND: ${{ github.event_name == 'pull_request' && 'pr' || 'issue' }}
+          NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
+        run: node .github/jev/scripts/gh-label.mjs "$KIND" "$NUMBER" --repo "$GITHUB_REPOSITORY"
