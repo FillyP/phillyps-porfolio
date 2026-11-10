@@ -1,0 +1,66 @@
+# Files git should never save. Each line is a pattern; a trailing "/" means a whole folder.
+
+# Secrets: environment files, keys and credentials. Never commit these, even to a private repo.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa*
+id_ed25519*
+*credentials*.json
+*secrets*.json
+service-account*.json
+
+# Build output: made from the source, so it can always be rebuilt.
+dist/
+build/
+out/
+target/
+.next/
+.nuxt/
+.svelte-kit/
+.output/
+
+# Downloaded dependencies: reinstalled from the project's package files.
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Big or generated files: logs, caches, test coverage, archives, installers, local databases.
+*.log
+logs/
+.cache/
+coverage/
+tmp/
+temp/
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+*.iso
+*.dmg
+*.exe
+*.msi
+*.sqlite
+*.sqlite3
+*.db
+
+# Personal editor and system files.
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+*.swp
+
+# Claude Code's personal, machine-only settings.
+.claude/settings.local.json
+CLAUDE.local.md
